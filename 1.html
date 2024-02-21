@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kt_1_1</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 25px;
+        text-align: center;
+        margin: 100px;
+      }
+      td.orange {
+        background-color: orange;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var numbers = [];
+        for (var i = 0; i < 30; i++) {
+          numbers.push(Math.floor(Math.random() * 100));
+        }
+
+        var table = document.createElement("table");
+        var index = 0;
+        for (var i = 0; i < 5; i++) {
+          var row = table.insertRow();
+          for (var j = 0; j < 6; j++) {
+            var cell = row.insertCell();
+            cell.textContent = numbers[index];
+            if (numbers[index] >= 50) {
+              cell.classList.add("orange");
+            }
+            index++;
+          }
+        }
+
+        document.body.appendChild(table);
+      });
+    </script>
+  </head>
+  <body></body>
+</html>
