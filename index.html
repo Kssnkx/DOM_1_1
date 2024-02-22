@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kt_1_DOM</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      td {
+        padding: 14px;
+      }
+
+      .color {
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="foo()">Добавить число</button>
+    <table id="table"></table>
+
+    <script>
+      let table = document.getElementById("table");
+      let numbers = [];
+      for (var i = 0; i < 30; i++) {
+        numbers.push(Math.floor(Math.random() * 100));
+      }
+      let chect = 0;
+      for (let i = 0; i < 5; i++) {
+        let row = table.insertRow();
+        for (let j = 0; j < 6; j++) {
+          let cell = row.insertCell();
+          let number = numbers[chect];
+          cell.textContent = number;
+          if (number >= 50) {
+            cell.classList.add("color");
+          }
+          chect++;
+        }
+      }
+      function foo() {
+        let newnumber = Math.floor(Math.random() * 100);
+        let table = document.getElementById("table");
+        let cellnew = document.createElement("td");
+        cellnew.textContent = newnumber;
+        if (newnumber >= 50) {
+          cellnew.classList.add("color");
+        }
+        let chectnew = table.getElementsByTagName("td").length;
+        let rowchect = Math.floor(chectnew / 6);
+        if (!table.rows[rowchect]) {
+          table.insertRow(rowchect);
+        }
+        table.rows[rowchect].appendChild(cellnew);
+      }
+    </script>
+  </body>
+</html>
