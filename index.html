@@ -3,64 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kt_1_DOM</title>
     <style>
-      table {
-        border-collapse: collapse;
-      }
-
-      table,
-      th,
-      td {
-        border: 1px solid black;
-      }
-
-      td {
-        padding: 14px;
-      }
-
-      .color {
-        background-color: orange;
-      }
+      @import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@600&display=swap");
     </style>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Ksnnkx_Kt1</title>
   </head>
   <body>
-    <button onclick="foo()">Добавить число</button>
-    <table id="table"></table>
+    <button onclick="addNewNum()">Добавить число</button>
 
     <script>
-      let table = document.getElementById("table");
-      let numbers = [];
-      for (var i = 0; i < 30; i++) {
-        numbers.push(Math.floor(Math.random() * 100));
+      let newNums = [];
+      for (let i = 0; i < 30; i++) {
+        newNums.push(Math.floor(Math.random() * 100));
       }
-      let chect = 0;
+      let board = document.createElement("table");
       for (let i = 0; i < 5; i++) {
-        let row = table.insertRow();
+        let newBox = document.createElement("tr");
         for (let j = 0; j < 6; j++) {
-          let cell = row.insertCell();
-          let number = numbers[chect];
-          cell.textContent = number;
-          if (number >= 50) {
-            cell.classList.add("color");
+          let newLine = document.createElement("td");
+          let newNum = newNums[i * 6 + j];
+          newLine.textContent = newNum;
+          if (newNum >= 50) {
+            newLine.style.backgroundColor = "orange";
           }
-          chect++;
+          newBox.appendChild(newLine);
         }
+        board.appendChild(newBox);
       }
-      function foo() {
-        let newnumber = Math.floor(Math.random() * 100);
-        let table = document.getElementById("table");
-        let cellnew = document.createElement("td");
-        cellnew.textContent = newnumber;
-        if (newnumber >= 50) {
-          cellnew.classList.add("color");
+      document.body.appendChild(board);
+    </script>
+
+    <script>
+      function addNewNum() {
+        let newNum = Math.floor(Math.random() * 100);
+        let lastNewBox = document.querySelector("table tr:last-child");
+        if (lastNewBox.children.length == 6) {
+          lastNewBox = document.createElement("tr");
+          document.querySelector("table").appendChild(lastNewBox);
         }
-        let chectnew = table.getElementsByTagName("td").length;
-        let rowchect = Math.floor(chectnew / 6);
-        if (!table.rows[rowchect]) {
-          table.insertRow(rowchect);
+        let newLine = document.createElement("td");
+        newLine.textContent = newNum;
+        if (newNum >= 50) {
+          newLine.style.backgroundColor = "orange";
         }
-        table.rows[rowchect].appendChild(cellnew);
+        lastNewBox.appendChild(newLine);
       }
     </script>
   </body>
